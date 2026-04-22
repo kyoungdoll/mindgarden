@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마음정원 | 임직원 심리상담실 이용안내</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0A1628; --blue: #0054A6; --accent: #00A3E0; --accent2: #38C9F4;
+  --gold: #C9A84C; --green: #2ECC71;
+  --t1: #F0F4FA; --t2: #8FA3BF; --t3: #4A5A72;
+  --bg: #0D1B2A; --card: #111D2E; --card2: #162236; --elev: #1A2D45;
+  --bdr: rgba(0,163,224,0.12); --bdrS: rgba(0,163,224,0.25);
+  --r: 16px; --rsm: 8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR','DM Sans',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;z-index:9999;background:var(--navy);display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:2rem 1rem;transition:opacity .6s,visibility .6s}
+#splash.gone{opacity:0;visibility:hidden;pointer-events:none}
+.sp-bg{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,84,166,.25) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,163,224,.15) 0%,transparent 50%);pointer-events:none}
+.sp-wrap{position:relative;z-index:2;text-align:center;width:100%;max-width:700px}
+.sp-leaf{font-size:3rem;display:block;margin-bottom:1rem;animation:flt 3s ease-in-out infinite}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.sp-title{font-family:'Noto Serif KR',serif;font-size:1.9rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.sp-sub{font-size:.82rem;color:var(--t2);margin-bottom:1.8rem}
+.sp-prompt{font-size:.7rem;color:var(--t3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
+.lang-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem;margin-bottom:.55rem}
+.lang-btn{padding:10px 4px;border-radius:10px;font-size:.75rem;font-weight:700;cursor:pointer;border:1.5px solid var(--bdrS);background:transparent;color:var(--t1);transition:all .25s;display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.3}
+.lang-btn:hover{background:var(--elev);border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.lang-btn.hi{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(0,163,224,.35)}
+.lang-btn.hi:hover{background:var(--accent2);border-color:var(--accent2)}
+.lf{font-size:1.25rem;line-height:1}
+.ln{font-size:.78rem;font-weight:700}
+.ll{font-size:.6rem;font-weight:400;opacity:.6}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-dot{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-name{font-family:'Noto Serif KR',serif;font-weight:700;font-size:1rem;color:var(--t1)}
+.nav-sub{font-size:.62rem;color:var(--t2);display:block}
+.nav-links{display:flex;gap:1.4rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--t2);font-size:.78rem;transition:color .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff!important;padding:7px 16px;border-radius:20px;font-size:.74rem!important;font-weight:700!important}
+.nav-cta:hover{opacity:.8}
+.lang-toggle-btn{background:var(--card2);border:1px solid var(--bdr);color:var(--t2);padding:5px 14px;border-radius:20px;font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.lang-toggle-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:60px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(0,84,166,.28) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(0,163,224,.15) 0%,transparent 45%),radial-gradient(ellipse at 50% 100%,rgba(0,40,100,.4) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,163,224,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,163,224,.03) 1px,transparent 1px);background-size:60px 60px}
+.hero-inner{position:relative;z-index:2;text-align:center;max-width:880px;padding:2rem;animation:fadeUp .9s ease forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,163,224,.1);border:1px solid rgba(0,163,224,.25);color:var(--accent);padding:8px 20px;border-radius:30px;font-size:.72rem;font-weight:600;margin-bottom:1.8rem;letter-spacing:.08em;text-transform:uppercase}
+.hero-title{font-family:'Noto Serif KR',serif;font-size:clamp(1.9rem,5vw,3.6rem);font-weight:700;color:var(--t1);line-height:1.2;margin-bottom:.9rem;letter-spacing:-.02em}
+.hero-title .ac{color:var(--accent)}
+.hero-sub{font-size:1rem;color:var(--t2);font-weight:300;margin-bottom:.4rem}
+.hero-dept{font-size:.78rem;color:var(--t3);margin-bottom:2.5rem}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;margin-bottom:2.5rem;flex-wrap:wrap;align-items:center}
+.hs-num{font-family:'DM Sans',sans-serif;font-size:2.1rem;font-weight:700;color:var(--accent);display:block;line-height:1}
+.hs-lbl{font-size:.68rem;color:var(--t3);margin-top:5px}
+.hs-sep{width:1px;height:38px;background:var(--bdr)}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-glow{background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;padding:13px 30px;border-radius:50px;font-weight:700;font-size:.88rem;text-decoration:none;transition:all .3s;box-shadow:0 4px 24px rgba(0,163,224,.3);display:inline-flex;align-items:center;gap:8px}
+.btn-glow:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(0,163,224,.45)}
+.btn-ghost{background:transparent;color:var(--t1);border:1.5px solid var(--bdrS);padding:13px 30px;border-radius:50px;font-weight:500;font-size:.88rem;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+.btn-ghost:hover{background:var(--elev);border-color:var(--accent)}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--t3);font-size:.67rem;letter-spacing:.12em;animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ── SECTIONS ── */
+section{padding:88px 2rem}
+.sc{max-width:1100px;margin:0 auto}
+.sh{text-align:center;margin-bottom:3.5rem}
+.stag{display:inline-block;background:rgba(0,163,224,.1);color:var(--accent);font-size:.67rem;font-weight:700;letter-spacing:.12em;padding:5px 15px;border-radius:20px;margin-bottom:.9rem;text-transform:uppercase;border:1px solid rgba(0,163,224,.2)}
+.stitle{font-family:'Noto Serif KR',serif;font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;color:var(--t1);line-height:1.3;margin-bottom:.8rem}
+.sdesc{color:var(--t2);font-size:.87rem;max-width:500px;margin:0 auto}
+.div{width:40px;height:2px;background:linear-gradient(90deg,var(--blue),var(--accent));margin:1.1rem auto 0;border-radius:2px}
+
+/* ── OVERVIEW ── */
+#overview{background:var(--card)}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.1rem}
+.ov-card{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);padding:1.7rem 1.3rem;text-align:center;transition:all .3s}
+.ov-card:hover{transform:translateY(-4px);border-color:var(--bdrS);box-shadow:0 8px 32px rgba(0,163,224,.08)}
+.ov-icon{font-size:1.9rem;margin-bottom:.9rem;display:block}
+.ov-lbl{font-size:.67rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.ov-val{font-size:.82rem;color:var(--t2);line-height:1.7}
+
+/* ── SYSTEM ── */
+#system{background:var(--bg)}
+.sys-row{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:1.4rem}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:1.8rem}
+.card-t{font-weight:700;font-size:.87rem;color:var(--t1);margin-bottom:1.1rem;display:flex;align-items:center;gap:10px}
+.ibadge{width:28px;height:28px;background:rgba(0,163,224,.1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.88rem;border:1px solid var(--bdr);flex-shrink:0}
+.tag-ch{display:inline-block;background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.3);font-size:.6rem;padding:2px 7px;border-radius:8px;margin-left:8px;font-weight:600}
+.dl{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.dl li{display:flex;align-items:center;gap:9px;font-size:.82rem;color:var(--t2)}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.rtable{width:100%;border-collapse:collapse;font-size:.82rem}
+.rtable th{background:rgba(0,163,224,.08);color:var(--accent);padding:11px 14px;text-align:left;font-weight:700;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--bdrS)}
+.rtable td{padding:12px 14px;color:var(--t2);border-bottom:1px solid var(--bdr)}
+.rtable tr:hover td{background:rgba(0,163,224,.04)}
+.rtable tr:last-child td{border-bottom:none}
+.pl{color:var(--accent);text-decoration:none;font-weight:600}
+.pl:hover{color:var(--accent2)}
+
+/* ── SERVICES ── */
+#services{background:var(--card)}
+.sv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.1rem}
+.sv-card{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);padding:1.5rem 1.3rem;transition:all .3s;position:relative;overflow:hidden}
+.sv-card:hover{transform:translateY(-4px);border-color:var(--bdrS);box-shadow:0 0 30px rgba(0,163,224,.09)}
+.sv-n{font-size:.62rem;font-weight:800;color:var(--t3);letter-spacing:.12em;margin-bottom:.5rem;font-family:'DM Sans',sans-serif}
+.sv-icon{font-size:1.55rem;margin-bottom:.7rem;display:block}
+.sv-name{font-weight:700;font-size:.87rem;color:var(--t1);margin-bottom:.35rem}
+.sv-desc{font-size:.76rem;color:var(--t2);line-height:1.65}
+.sv-badge{position:absolute;top:10px;right:10px;font-size:.58rem;font-weight:700;padding:3px 7px;border-radius:7px;letter-spacing:.04em}
+.bu{background:rgba(220,50,50,.12);color:#FF7070;border:1px solid rgba(220,50,50,.25)}
+.bf{background:rgba(46,170,100,.1);color:#5FCC8A;border:1px solid rgba(46,170,100,.25)}
+.b24{background:rgba(0,163,224,.1);color:var(--accent);border:1px solid var(--bdr)}
+
+/* ── COUNSELOR SIMPLE CARD ── */
+.co-simple{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:2.2rem 1.5rem;text-align:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.co-simple::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,84,166,.04),rgba(0,163,224,.04));opacity:0;transition:opacity .3s}
+.co-simple:hover{transform:translateY(-5px);border-color:var(--bdrS);box-shadow:0 16px 48px rgba(0,163,224,.12)}
+.co-simple:hover::before{opacity:1}
+.co-av-lg{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--accent));display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin:0 auto 1.2rem;border:3px solid rgba(0,163,224,.25);box-shadow:0 0 24px rgba(0,163,224,.2)}
+.co-simple-tag{font-size:.63rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;background:rgba(0,163,224,.1);border:1px solid var(--bdr);padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:.6rem}
+.co-simple-name{font-family:'Noto Serif KR',serif;font-size:1.3rem;font-weight:700;color:var(--t1);margin-bottom:.3rem}
+.co-simple-exp{font-size:.76rem;color:var(--t3);margin-bottom:1rem}
+.co-more-hint{font-size:.72rem;color:var(--accent);font-weight:600;opacity:.7;transition:opacity .2s}
+.co-simple:hover .co-more-hint{opacity:1}
+
+/* ── COUNSELOR MODAL ── */
+.co-modal-bg{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.co-modal-bg.open{opacity:1;visibility:visible}
+.co-modal-box{background:var(--card);border:1px solid var(--bdrS);border-radius:var(--r);width:100%;max-width:560px;max-height:88vh;overflow-y:auto;position:relative;animation:modalIn .3s ease}
+@keyframes modalIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.co-modal-close{position:sticky;top:1rem;float:right;margin:1rem 1rem 0 0;background:var(--elev);border:1px solid var(--bdr);color:var(--t2);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:1}
+.co-modal-close:hover{background:var(--bdrS);color:var(--t1)}
+.mo-head{padding:2rem 2rem 1.5rem;display:flex;align-items:center;gap:1.4rem;border-bottom:1px solid var(--bdr)}
+.mo-av{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--accent));display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;border:2px solid rgba(0,163,224,.3)}
+.mo-tag{font-size:.62rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;background:rgba(0,163,224,.1);border:1px solid var(--bdr);padding:3px 9px;border-radius:10px;display:inline-block;margin-bottom:.4rem}
+.mo-name{font-family:'Noto Serif KR',serif;font-size:1.25rem;font-weight:700;color:var(--t1);margin-bottom:.25rem}
+.mo-exp{font-size:.76rem;color:var(--t3);display:flex;align-items:center;gap:5px}
+.mo-exp::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.mo-body{padding:1.5rem 2rem 2rem}
+.mo-sec{font-size:.65rem;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;display:flex;align-items:center;gap:8px}
+.mo-sec::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.mo-cl{list-style:none;display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.3rem}
+.mo-cl li{display:flex;align-items:flex-start;gap:8px;font-size:.79rem;color:var(--t2);line-height:1.55;padding:7px 11px;background:var(--bg);border-radius:7px;border:1px solid var(--bdr)}
+.mo-dot{width:5px;height:5px;border-radius:50%;background:var(--t3);flex-shrink:0;margin-top:5px}
+.mo-cert{display:flex;flex-direction:column;gap:.35rem}
+.mo-cert-item{display:flex;align-items:center;gap:7px;font-size:.77rem;color:var(--t2);padding:5px 8px;border-radius:6px}
+.mo-cert-item strong{color:var(--t1);font-weight:600}
+
+/* ── COUNSELORS ── */
+#counselors{background:var(--bg)}
+.co-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.8rem}
+.co-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;transition:all .3s}
+.co-card:hover{transform:translateY(-4px);border-color:var(--bdrS);box-shadow:0 16px 48px rgba(0,163,224,.1)}
+.co-head{padding:1.8rem 1.8rem 1.4rem;display:flex;align-items:flex-start;gap:1.2rem;border-bottom:1px solid var(--bdr)}
+.co-av{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--accent));display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;border:2px solid rgba(0,163,224,.3)}
+.co-tag{font-size:.62rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;background:rgba(0,163,224,.1);border:1px solid var(--bdr);padding:3px 9px;border-radius:10px;display:inline-block;margin-bottom:.45rem}
+.co-name{font-family:'Noto Serif KR',serif;font-size:1.2rem;font-weight:700;color:var(--t1);margin-bottom:.28rem}
+.co-exp{font-size:.76rem;color:var(--t3);display:flex;align-items:center;gap:6px}
+.co-exp::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.co-body{padding:1.4rem 1.8rem 1.8rem}
+.co-sec{font-size:.65rem;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;display:flex;align-items:center;gap:8px}
+.co-sec::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.cl{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.3rem}
+.cl li{display:flex;align-items:flex-start;gap:9px;font-size:.78rem;color:var(--t2);line-height:1.55;padding:7px 11px;background:var(--bg);border-radius:7px;border:1px solid var(--bdr)}
+.cl li.now{border-color:rgba(0,163,224,.22);color:var(--t1)}
+.cldot{width:5px;height:5px;border-radius:50%;background:var(--t3);flex-shrink:0;margin-top:6px}
+.cl li.now .cldot{background:var(--accent);box-shadow:0 0 6px rgba(0,163,224,.4)}
+.cert-list{display:flex;flex-direction:column;gap:.35rem}
+.cert-item{display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--t2);padding:5px 9px;border-radius:6px}
+.cert-item strong{color:var(--t1);font-weight:600}
+
+/* ── APPLY ── */
+#apply{background:var(--card)}
+.ap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-bottom:1.8rem}
+.ap-card{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);padding:1.8rem 1.4rem;text-align:center;transition:all .3s}
+.ap-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 0 30px rgba(0,163,224,.1)}
+.ap-ring{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.55rem;margin:0 auto 1.1rem;border:1.5px solid var(--bdrS);background:var(--elev)}
+.ap-title{font-weight:700;font-size:.93rem;color:var(--t1);margin-bottom:.7rem}
+.ap-desc{font-size:.78rem;color:var(--t2);line-height:1.8}
+.ap-btn{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;padding:8px 20px;border-radius:20px;font-size:.75rem;font-weight:700;text-decoration:none;transition:opacity .2s}
+.ap-btn:hover{opacity:.8}
+.store-btns{display:flex;gap:.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.store-btn{display:inline-flex;align-items:center;gap:6px;background:var(--elev);border:1px solid var(--bdrS);color:var(--t1);padding:8px 14px;border-radius:10px;font-size:.73rem;font-weight:600;text-decoration:none;transition:all .2s}
+.store-btn:hover{border-color:var(--accent);color:var(--accent)}
+.phone-big{display:inline-flex;align-items:center;gap:8px;margin-top:1rem;background:var(--elev);border:1px solid var(--bdrS);color:var(--accent);padding:10px 22px;border-radius:10px;font-size:1.05rem;font-weight:700;text-decoration:none;letter-spacing:.03em;transition:all .2s}
+.phone-big:hover{background:rgba(0,163,224,.1);border-color:var(--accent)}
+.duon-box{background:var(--bg);border:1px solid var(--bdr);border-left:3px solid var(--accent);border-radius:var(--r);padding:1.4rem 1.7rem;margin-bottom:1.7rem}
+.duon-ttl{font-weight:700;font-size:.86rem;color:var(--accent);margin-bottom:.8rem;display:flex;align-items:center;gap:8px}
+.duon-steps{display:flex;align-items:center;gap:.45rem;font-size:.78rem;color:var(--t2);flex-wrap:wrap}
+.dstep{background:var(--elev);border:1px solid var(--bdr);padding:5px 13px;border-radius:20px;font-weight:500}
+.darr{color:var(--accent);font-size:.76rem}
+.flow-box{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);padding:1.8rem 2.2rem;margin-bottom:1.7rem}
+.flow-ttl{font-weight:700;font-size:.87rem;color:var(--t1);margin-bottom:1.8rem;display:flex;align-items:center;gap:8px}
+.fsteps{display:flex;align-items:center}
+.fstep{flex:1;text-align:center}
+.fbubble{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--accent));display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin:0 auto .7rem;box-shadow:0 0 20px rgba(0,163,224,.18)}
+.fnum{font-size:.6rem;font-weight:800;color:var(--accent);letter-spacing:.08em;font-family:'DM Sans',sans-serif;margin-bottom:3px}
+.ftxt{font-size:.78rem;font-weight:600;color:var(--t1);line-height:1.4}
+.farr{font-size:1rem;color:var(--t3);flex-shrink:0;margin:0 .4rem;padding-bottom:1.7rem}
+.fnote{margin-top:1.4rem;padding:11px 15px;background:rgba(201,168,76,.05);border-left:2px solid var(--gold);border-radius:0 7px 7px 0;font-size:.77rem;color:rgba(201,168,76,.75);line-height:1.7}
+.ct-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.ct-card{background:var(--bg);border:1px solid var(--bdr);border-top:2px solid var(--accent);border-radius:var(--r);padding:1.3rem;text-align:center}
+.ct-name{font-weight:700;font-size:.84rem;color:var(--t1);margin-bottom:.45rem}
+
+/* Law badge */
+.law-bar{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);padding:1.1rem 1.6rem;display:flex;align-items:center;gap:12px;margin-top:1.6rem}
+.law-icon{font-size:1.3rem;flex-shrink:0}
+.law-text{font-size:.78rem;color:var(--t2);line-height:1.7}
+.law-text strong{color:var(--accent)}
+
+/* ── PRIVACY ── */
+#privacy{background:var(--bg);position:relative;overflow:hidden}
+#privacy::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,84,166,.1) 0%,transparent 70%);pointer-events:none}
+.pq-box{background:linear-gradient(135deg,rgba(0,84,166,.14),rgba(0,163,224,.07));border:1px solid var(--bdrS);border-radius:var(--r);padding:2.8rem 2rem;text-align:center;margin-bottom:2.2rem}
+.pq-mark{font-size:3.8rem;color:var(--accent);opacity:.22;line-height:0;display:block;margin-bottom:1.4rem}
+.pq-text{font-family:'Noto Serif KR',serif;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:600;color:var(--t1);line-height:1.8}
+.pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:1.4rem}
+.pv-item{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:1.7rem;display:flex;gap:1rem;align-items:flex-start}
+.pv-ico{font-size:1.45rem;flex-shrink:0;margin-top:2px}
+.pv-ttl{font-weight:700;font-size:.87rem;color:var(--accent);margin-bottom:.45rem}
+.pv-txt{font-size:.79rem;color:var(--t2);line-height:1.8}
+.pv-contact{background:var(--card);border:1px solid var(--bdr);border-radius:var(--rsm);padding:1.1rem 1.7rem;display:flex;align-items:center;gap:1rem;font-size:.82rem;color:var(--t2)}
+
+/* ── FAQ ── */
+#faq{background:var(--card)}
+.faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:.75rem}
+.faq-item{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+.faq-item[open]{border-color:var(--bdrS)}
+.faq-q{padding:1.1rem 1.4rem;display:flex;align-items:center;gap:11px;cursor:pointer;font-weight:600;font-size:.84rem;color:var(--t1);user-select:none;list-style:none;transition:background .2s}
+.faq-q:hover{background:var(--elev)}
+.faq-q::-webkit-details-marker{display:none}
+.qb{width:25px;height:25px;background:rgba(0,163,224,.1);border:1px solid var(--bdr);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.67rem;font-weight:800;flex-shrink:0}
+.qarr{margin-left:auto;color:var(--t3);font-size:.8rem;transition:transform .3s}
+details[open] .qarr{transform:rotate(180deg)}
+.faq-a{padding:1.1rem 1.4rem 1.5rem calc(1.4rem + 36px);font-size:.82rem;color:var(--t2);line-height:1.9;border-top:1px solid var(--bdr);background:var(--card)}
+.faq-a a{color:var(--accent);text-decoration:none}
+.faq-a a:hover{text-decoration:underline}
+
+/* ── QR / DOWNLOAD ── */
+#download{background:var(--bg);padding:80px 2rem}
+.qr-wrap{max-width:700px;margin:0 auto}
+.qr-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:2.5rem;display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+.qr-box{width:140px;height:140px;background:#fff;border-radius:12px;padding:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.qr-info{flex:1;min-width:200px}
+.qr-title{font-family:'Noto Serif KR',serif;font-size:1.1rem;font-weight:700;color:var(--t1);margin-bottom:.5rem}
+.qr-sub{font-size:.82rem;color:var(--t2);line-height:1.7;margin-bottom:1rem}
+.qr-store-row{display:flex;gap:.6rem;flex-wrap:wrap}
+.qr-store-btn{display:inline-flex;align-items:center;gap:7px;background:var(--elev);border:1px solid var(--bdrS);color:var(--t1);padding:9px 16px;border-radius:10px;font-size:.78rem;font-weight:600;text-decoration:none;transition:all .2s}
+.qr-store-btn:hover{border-color:var(--accent);color:var(--accent)}
+.qr-code{width:120px;height:120px}
+
+/* ── FOOTER ── */
+footer{background:#070E18;border-top:1px solid var(--bdr);color:var(--t3);padding:2.8rem 2rem;text-align:center;font-size:.77rem}
+.ft-logo{font-family:'Noto Serif KR',serif;font-size:1.05rem;font-weight:700;color:var(--t1);margin-bottom:.5rem}
+footer p{margin-bottom:.3rem;line-height:1.7}
+footer a{color:var(--t3);text-decoration:none}
+footer a:hover{color:var(--accent)}
+.ft-sep{width:30px;height:1px;background:var(--bdr);margin:1rem auto}
+
+/* ── ANIM ── */
+.fi{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.fi.v{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .ap-grid,.sys-row,.pv-grid,.ct-row,.co-grid{grid-template-columns:1fr}
+  .fsteps{flex-direction:column;align-items:center}
+  .farr{transform:rotate(90deg);padding:0;margin:.3rem 0}
+  .hs-sep{display:none}
+  .hero-stats{gap:1.5rem}
+  .lang-grid{grid-template-columns:repeat(3,1fr)}
+  .qr-card{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:420px){.lang-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="sp-bg"></div>
+  <div class="sp-wrap">
+    <span class="sp-leaf">🌿</span>
+    <div class="sp-title">마음정원</div>
+    <div class="sp-sub">HD현대중공업 임직원 심리상담실</div>
+    <div class="sp-prompt">Select Language · 언어를 선택하세요</div>
+    <div class="lang-grid">
+      <button class="lang-btn hi" onclick="setLang('ko')"><span class="lf">🇰🇷</span><span class="ln">한국어</span><span class="ll">Korean</span></button>
+      <button class="lang-btn" onclick="setLang('en')"><span class="lf">🇺🇸</span><span class="ln">English</span><span class="ll">영어</span></button>
+      <button class="lang-btn" onclick="setLang('vi')"><span class="lf">🇻🇳</span><span class="ln">Tiếng Việt</span><span class="ll">베트남어</span></button>
+      <button class="lang-btn" onclick="setLang('uz')"><span class="lf">🇺🇿</span><span class="ln">O'zbek</span><span class="ll">우즈벡어</span></button>
+      <button class="lang-btn" onclick="setLang('id')"><span class="lf">🇮🇩</span><span class="ln">Indonesia</span><span class="ll">인도네시아어</span></button>
+    </div>
+    <div class="lang-grid">
+      <button class="lang-btn" onclick="setLang('si')"><span class="lf">🇱🇰</span><span class="ln">සිංහල</span><span class="ll">스리랑카</span></button>
+      <button class="lang-btn" onclick="setLang('th')"><span class="lf">🇹🇭</span><span class="ln">ภาษาไทย</span><span class="ll">태국어</span></button>
+      <button class="lang-btn" onclick="setLang('ru')"><span class="lf">🇷🇺</span><span class="ln">Русский</span><span class="ll">러시아어</span></button>
+      <button class="lang-btn" onclick="setLang('ky')"><span class="lf">🇰🇬</span><span class="ln">Кыргызча</span><span class="ll">키르기즈어</span></button>
+      <button class="lang-btn" onclick="setLang('zh')"><span class="lf">🇨🇳</span><span class="ln">中文</span><span class="ll">중국어</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-dot">🌿</div>
+    <div>
+      <span class="nav-name">마음정원</span>
+      <span class="nav-sub" id="nav-sub">임직원 심리상담실</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#overview" id="nl-overview">운영 개요</a></li>
+    <li><a href="#system" id="nl-system">운영 체계</a></li>
+    <li><a href="#services" id="nl-services">제공 서비스</a></li>
+    <li><a href="#counselors" id="nl-counselors">상담사 소개</a></li>
+    <li><a href="#apply" id="nl-apply">상담 신청</a></li>
+    <li><a href="#privacy" id="nl-privacy">비밀보장</a></li>
+    <li><a href="#faq" id="nl-faq">FAQ</a></li>
+    <li><a href="https://hdhhi.happymint.kr" target="_blank" class="nav-cta" id="nl-cta">상담 신청하기 →</a></li>
+  </ul>
+  <button class="lang-toggle-btn" id="lang-toggle-btn" onclick="openSplash()">🇰🇷 한국어 ▾</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge" id="h-badge">🌿 HD현대중공업 임직원 심리상담실</div>
+    <h1 class="hero-title">
+      <span id="h-t1">임직원 심리상담실</span><br>
+      <span class="ac" id="h-t2">'마음정원' 이용 안내</span>
+    </h1>
+    <p class="hero-sub" id="h-sub">마음이 건강해야 일도, 삶도 풍요로워집니다</p>
+    <p class="hero-dept" id="h-dept">HD현대 계열사 임직원 및 가족을 위한 전문 심리 상담 서비스</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hs-num">3</span><div class="hs-lbl" id="hs1">전문 상담사</div></div>
+      <div class="hs-sep"></div>
+      <div class="hero-stat"><span class="hs-num">4</span><div class="hs-lbl" id="hs2">상담 센터</div></div>
+      <div class="hs-sep"></div>
+      <div class="hero-stat"><span class="hs-num">10</span><div class="hs-lbl" id="hs3">제공 서비스</div></div>
+      <div class="hs-sep"></div>
+      <div class="hero-stat"><span class="hs-num">24H</span><div class="hs-lbl" id="hs4">긴급 상담</div></div>
+      <div class="hs-sep"></div>
+      <div class="hero-stat"><span class="hs-num">무료</span><div class="hs-lbl" id="hs5">1인 10회기</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="https://hdhhi.happymint.kr" target="_blank" class="btn-glow" id="h-btn1">🌐 홈페이지 상담 신청</a>
+      <a href="#overview" class="btn-ghost" id="h-btn2">이용안내 보기 ↓</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span id="h-scroll">SCROLL</span><span>↓</span></div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="sc">
+    <div class="sh fi">
+      <div class="stag" id="ov-tag">운영 개요</div>
+      <h2 class="stitle" id="ov-title">마음정원은 어떤 곳인가요?</h2>
+      <p class="sdesc" id="ov-desc">임직원의 정신건강 케어 및 스트레스 관리를 통한 업무 효율성 제고를 목적으로 운영됩니다.</p>
+      <div class="div"></div>
+    </div>
+    <div class="ov-grid">
+      <div class="ov-card fi"><span class="ov-icon">🎯</span><div class="ov-lbl" id="ov-l1">운영 목적</div><div class="ov-val" id="ov-v1">정신건강 케어 및 스트레스 관리를 통한 업무 효율성 제고</div></div>
+      <div class="ov-card fi"><span class="ov-icon">👥</span><div class="ov-lbl" id="ov-l2">이용 대상</div><div class="ov-val" id="ov-v2">울산 소재 HD현대 계열사 및 사내 협력사 임직원<br>임직원 가족 (배우자·부모·자녀 포함)</div></div>
+      <div class="ov-card fi"><span class="ov-icon">🕐</span><div class="ov-lbl" id="ov-l3">운영 시간</div><div class="ov-val" id="ov-v3">월 ~ 금<br><strong>09:00 ~ 18:00</strong></div></div>
+      <div class="ov-card fi"><span class="ov-icon">💬</span><div class="ov-lbl" id="ov-l4">상담 방식</div><div class="ov-val" id="ov-v4">대면 / 전화 / 화상 / 채팅<br><small style="color:var(--t3)">회당 50분 내외</small></div></div>
+      <div class="ov-card fi"><span class="ov-icon">🎁</span><div class="ov-lbl" id="ov-l5">이용 비용</div><div class="ov-val" id="ov-v5"><strong style="color:var(--accent)">무료</strong><br><small style="color:var(--t3)">1인당 10회기 제공</small></div></div>
+      <div class="ov-card fi"><span class="ov-icon">📋</span><div class="ov-lbl" id="ov-l6">상담 주제</div><div class="ov-val" id="ov-v6">대인관계, 직무스트레스, 개인정서, 부부/가정 문제 등 심리 영역 전반</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM -->
+<section id="system">
+  <div class="sc">
+    <div class="sh fi">
+      <div class="stag" id="sy-tag">운영 체계</div>
+      <h2 class="stitle" id="sy-title">전문 인력과 체계적인 시스템</h2>
+      <div class="div"></div>
+    </div>
+    <div class="sys-row fi">
+      <div class="card">
+        <div class="card-t"><div class="ibadge">🏢</div><span id="sy-op-t">위탁운영 업체</span></div>
+        <p style="font-size:1.05rem;font-weight:700;color:var(--t1);margin-bottom:.9rem;">텔러스헬스 주식회사</p>
+        <ul class="dl" style="gap:.7rem;">
+          <li><span class="dot"></span><span>국내 EAP(근로자지원프로그램) <strong style="color:var(--accent)">업계 1위</strong> 기업</span></li>
+          <li><span class="dot"></span><span>국내 시장점유율 <strong style="color:var(--accent)">60%</strong></span></li>
+          <li><span class="dot"></span><span>국내외 고객사 <strong style="color:var(--accent)">1,270개</strong></span></li>
+          <li><span class="dot" style="background:var(--t3)"></span><span style="color:var(--t3);font-size:.75rem;">사명 변경: 2026년 3월, 이지앤웰니스(주) → 텔러스헬스(주)</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-t"><div class="ibadge">👤</div><span id="sy-co-t">전문 상담사 구성</span></div>
+        <ul class="dl">
+          <li><span class="dot"></span><span id="sy-c1">총 3인 체제 운영</span></li>
+          <li><span class="dot"></span><span id="sy-c2">문화관 2인 상주</span></li>
+          <li><span class="dot"></span><span id="sy-c3">중형선 1인 상주</span></li>
+          <li><span class="dot"></span><span id="sy-c4">해양에너지, 인재교육원 출장 상담실 운영</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card fi">
+      <div class="card-t"><div class="ibadge">🏥</div><span id="sy-room-t">상담실 현황</span></div>
+      <table class="rtable">
+        <thead>
+          <tr>
+            <th id="rth1">상담실명</th><th id="rth2">위치</th><th id="rth3">운영일</th><th id="rth4">전화번호</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong id="r1n">마음정원 (문화관)</strong></td>
+            <td id="r1l">문화관 3층</td>
+            <td id="r1s">월~금, 주 5회</td>
+            <td><a href="tel:052-202-9001" class="pl">052-202-9001</a></td>
+          </tr>
+          <tr>
+            <td><strong id="r2n">마음정원 (중형선)</strong></td>
+            <td id="r2l">중형선사업본부 한우리회관 1층</td>
+            <td id="r2s">월~금, 주 5회</td>
+            <td><a href="tel:052-250-3467" class="pl">052-250-3467</a></td>
+          </tr>
+          <tr>
+            <td><strong id="r3n">마음정원 (해양에너지)</strong></td>
+            <td id="r3l">해양에너지사업본부 본관 1층</td>
+            <td id="r3s">월~금, 주 5회</td>
+            <td><a href="tel:052-202-9001" class="pl">052-202-9001</a></td>
+          </tr>
+          <tr>
+            <td><strong id="r4n">마음정원 (인재교육원)</strong></td>
+            <td id="r4l">인재교육원 지하 1층</td>
+            <td id="r4s">월~금, 주 5회</td>
+            <td><a href="tel:052-202-9001" class="pl">052-202-9001</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sc">
+    <div class="sh fi">
+      <div class="stag" id="sv-tag">제공 서비스</div>
+      <h2 class="stitle" id="sv-title">마음정원에서 제공하는 서비스</h2>
+      <p class="sdesc" id="sv-desc">다양한 심리 지원 프로그램으로 임직원의 심리적 안녕을 돕습니다.</p>
+      <div class="div"></div>
+    </div>
+    <div class="sv-grid">
+      <div class="sv-card fi"><div class="sv-n">01</div><span class="sv-icon">🧑‍💼</span>
+        <div class="sv-name" id="sv1n">개인 심리상담</div>
+        <div class="sv-desc" id="sv1d">직장생활, 개인 정서, 부부/가족 주제 등 임직원 개인 맞춤 심리상담</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">02</div><span class="sv-icon">🚨</span>
+        <div class="sv-name" id="sv2n">심리회복지원 프로그램</div>
+        <div class="sv-desc" id="sv2d">중대재해·사고 등 위기 발생 시 초기 개입부터 추적 상담까지, 심리적 회복을 단계적으로 지원</div>
+        <div class="sv-badge bu" id="sv2b">긴급</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">03</div><span class="sv-icon">🏆</span>
+        <div class="sv-name" id="sv3n">기능올림픽 선수 심리케어</div>
+        <div class="sv-desc" id="sv3d">기능올림픽 출전 선수의 심리적 부담 완화 및 경기력 유지를 위한 전담 심리케어</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">04</div><span class="sv-icon">🌅</span>
+        <div class="sv-name" id="sv4n">퇴직예정자 상담</div>
+        <div class="sv-desc" id="sv4d">퇴직 직원 노고에 대한 단기 상담 및 미래 설계 지원</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">05</div><span class="sv-icon">👨‍👩‍👧</span>
+        <div class="sv-name" id="sv5n">사우 가족 상담</div>
+        <div class="sv-desc" id="sv5d">임직원 가족 대상 상담 — 부부 동반 상담 및 배우자·자녀·부모 개별 이용 가능</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">06</div><span class="sv-icon">🌍</span>
+        <div class="sv-name" id="sv6n">외국인 근로자 상담</div>
+        <div class="sv-desc" id="sv6d">외국인 근로자를 위한 맞춤형 심리상담 지원</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">07</div><span class="sv-icon">🤝</span>
+        <div class="sv-name" id="sv7n">조직활성화 교육</div>
+        <div class="sv-desc" id="sv7d">팀워크 향상 및 조직 내 소통 활성화를 위한 심리 교육 프로그램</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">08</div><span class="sv-icon">🌸</span>
+        <div class="sv-name" id="sv8n">힐링 프로그램</div>
+        <div class="sv-desc" id="sv8d">심리적 안정과 회복을 위한 다양한 힐링 활동</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">09</div><span class="sv-icon">📊</span>
+        <div class="sv-name" id="sv9n">온라인 심리검사</div>
+        <div class="sv-desc" id="sv9d">직장인 마음건강 셀프진단 (73문항, 무료)</div>
+        <div class="sv-badge bf" id="sv9b">무료</div>
+      </div>
+      <div class="sv-card fi"><div class="sv-n">10</div><span class="sv-icon">📞</span>
+        <div class="sv-name" id="sv10n">긴급 심리상담</div>
+        <div class="sv-desc" id="sv10d">운영시간 외 24시간 긴급 심리상담 지원</div>
+        <div class="sv-badge b24">24H</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNSELORS -->
+<section id="counselors">
+  <div class="sc">
+    <div class="sh fi">
+      <div class="stag" id="co-tag">전문 상담사</div>
+      <h2 class="stitle" id="co-title">마음정원 전문 상담사를 소개합니다</h2>
+      <p class="sdesc" id="co-desc">풍부한 경험과 전문성을 갖춘 상담사들이 여러분의 이야기를 함께합니다.</p>
+      <div class="div"></div>
+    </div>
+    <div class="co-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:760px;margin:0 auto">
+
+      <!-- 송은미 -->
+      <div class="co-simple fi" onclick="openCounselor('song')">
+        <div class="co-av-lg">🌿</div>
+        <div class="co-simple-tag">심리상담실장</div>
+        <div class="co-simple-name">송은미 <span style="font-size:.72rem;color:var(--t3);font-weight:400;">상담사</span></div>
+        <div class="co-simple-exp">경력 12년 3개월</div>
+        <div class="co-more-hint">자세히 보기 →</div>
+      </div>
+
+      <!-- 손은경 -->
+      <div class="co-simple fi" onclick="openCounselor('son')">
+        <div class="co-av-lg">🌸</div>
+        <div class="co-simple-tag">전문 상담사</div>
+        <div class="co-simple-name">손은경 <span style="font-size:.72rem;color:var(--t3);font-weight:400;">상담사</span></div>
+        <div class="co-simple-exp">경력 7년 8개월</div>
+        <div class="co-more-hint">자세히 보기 →</div>
+      </div>
+
+      <!-- 서나래 -->
+      <div class="co-simple fi" onclick="openCounselor('seo')">
+        <div class="co-av-lg">🌼</div>
+        <div class="co-simple-tag">전문 상담사</div>
+        <div class="co-simple-name">서나래 <span style="font-size:.72rem;color:var(--t3);font-weight:400;">상담사</span></div>
+        <div class="co-simple-exp">경력 6년 9개월</div>
+        <div class="co-more-hint">자세히 보기 →</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COUNSELOR MODAL -->
+<div id="co-modal" class="co-modal-bg" onclick="closeCounselor(event)">
+  <div class="co-modal-box">
+    <button class="co-modal-close" onclick="closeCounselorBtn()">✕</button>
+    <div id="co-modal-content"></div>
+  </div>
+</div>
+
+<!-- APPLY -->
+<section id="apply">
+  <div class="sc">
+    <div class="sh fi">
+      <div class="stag" id="ap-tag">상담 신청</div>
+      <h2 class="stitle" id="ap-title">상담 신청 방법</h2>
+      <p class="sdesc" id="ap-desc">세 가지 방법으로 편리하게 상담을 신청하실 수 있습니다.</p>
+      <div class="div"></div>
+    </div>
+
+    <div class="ap-grid fi">
+      <!-- 홈페이지 -->
+      <div class="ap-card">
+        <div class="ap-ring">🌐</div>
+        <div class="ap-title" id="ap1t">홈페이지</div>
+        <div class="ap-desc" id="ap1d">
+          듀온(DuoNX) 내<br><strong>[마음정원] 아이콘</strong> 클릭<br>또는 외부망 홈페이지 직접 접속
+        </div>
+        <a href="https://hdhhi.happymint.kr" target="_blank" class="ap-btn" id="ap1b">🌐 홈페이지 바로가기 →</a>
+      </div>
+
+      <!-- 앱 -->
+      <div class="ap-card">
+        <div class="ap-ring">📱</div>
+        <div class="ap-title" id="ap2t">모바일 앱</div>
+        <div class="ap-desc" id="ap2d">
+          <strong>[해피민트]</strong> 앱 다운로드<br>
+          소속회사: <strong>HD현대중공업</strong><br>
+          또는 코드: <strong>hdhhi</strong>
+        </div>
+        <div class="store-btns">
+          <a href="https://apps.apple.com/kr/app/%ED%95%B4%ED%94%BC%EB%AF%BC%ED%8A%B8/id1536523540" target="_blank" class="store-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.telus.happymint" target="_blank" class="store-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L14.6 12 3.18.04A1.35 1.35 0 002.5 1.2v21.6c0 .36.17.7.44.96zM19.38 9.54L16.5 7.9l-3.3 3.3 3.3 3.3 2.92-1.67a1.36 1.36 0 000-2.33l-.04-.06zM4.03.26L15.18 11.4 4.03 22.54 15.18 11.4 4.03.26z"/></svg>
+            Google Play
+          </a>
+        </div>
+      </div>
+
+      <!-- 전화 -->
+      <div class="ap-card">
+        <div class="ap-ring">📞</div>
+        <div class="ap-title" id="ap3t">전화 / 방문</div>
+        <div class="ap-desc" id="ap3d">
+          각 상담실 대표번호로<br>직접 예약 신청 가능<br>(월~금 09:00~18:00)
+        </div>
+        <a href="tel:052-202-9001" class="phone-big">📞 052-202-9001</a>
+      </div>
+    </div>
+
+    <!-- 신청 절차 -->
+    <div class="flow-box fi">
+      <div class="flow-ttl">📋 <span id="fl-t">상담 신청 절차 (4단계)</span></div>
+      <div class="fsteps">
+        <div class="fstep"><div class="fbubble">📝</div><div class="fnum">STEP 01</div><div class="ftxt" id="fs1">상담 신청<br>(예약)</div></div>
+        <div class="farr">→</div>
+        <div class="fstep"><div class="fbubble">✅</div><div class="fnum">STEP 02</div><div class="ftxt" id="fs2">담당 상담사 확인<br>및 예약 확정</div></div>
+        <div class="farr">→</div>
+        <div class="fstep"><div class="fbubble">💬</div><div class="fnum">STEP 03</div><div class="ftxt" id="fs3">상담 / 심리검사<br>진행</div></div>
+        <div class="farr">→</div>
+        <div class="fstep"><div class="fbubble">🌿</div><div class="fnum">STEP 04</div><div class="ftxt" id="fs4">상담 연장 /<br>종결</div></div>
+      </div>
+      <div class="fnote" id="fl-note">
+        ※ 사이트 내 <strong>'결제하기'</strong>는 비용 결제가 아닌 <strong>회사 지원 회기 차감 절차</strong>입니다. <strong>개인 비용 부담은 없습니다.</strong>
+      </div>
+    </div>
+
+    <!-- 센터별 연락처 -->
+    <div class="ct-row fi">
+      <div class="ct-card"><div class="ct-name" id="ct1n">🏢 문화관</div><a href="tel:052-202-9001" class="pl" style="font-size:1rem;font-weight:700;">052-202-9001</a></div>
+      <div class="ct-card"><div class="ct-name" id="ct2n">🏭 중형선</div><a href="tel:052-250-3467" class="pl" style="font-size:1rem;font-weight:700;">052-250-3467</a></div>
+      <div class="ct-card"><div class="ct-name" id="ct3n">⚓ 해양에너지</div><a href="tel:052-202-9001" class="pl" style="font-size:1rem;font-weight:700;">052-202-9001</a></div>
+      <div class="ct-card" style="border-top-color:var(--gold)"><div class="ct-name" id="ct4n">🎓 인재교육원</div><a href="tel:052-202-9001" class="pl" style="font-size:1rem;font-weight:700;">052-202-9001</a></div>
+    </div>
+
+    <!-- 법적 비밀보장 배너 -->
+    <div class="law-bar fi">
+      <span class="law-icon">⚖️</span>
+      <div class="law-text" id="law-txt">
+        서비스 이용과 관련된 모든 내용(상담 기록, 심리검사 결과 등)은 <strong>근로복지기본법 제83조</strong>에 따라 안전하게 비밀 보장됩니다.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy">
+  <div class="sc">
+    <div class="sh fi">
+      <div class="stag" id="pv-tag">비밀보장 원칙</div>
+      <div class="div"></div>
+    </div>
+    <div class="pq-box fi">
+      <span class="pq-mark">"</span>
+      <div class="pq-text" id="pv-quote">마음정원을 찾아주시는 모든 분의 이야기는<br>안전하게 보호됩니다</div>
+    </div>
+    <div class="pv-grid fi">
+      <div class="pv-item">
+        <div class="pv-ico">🔒</div>
+        <div>
+          <div class="pv-ttl" id="pv1t">상담내용 비밀보장</div>
+          <div class="pv-txt" id="pv1d">모든 상담 기록 및 내용은 철저히 비밀이 보장됩니다. 상담사는 전문가 윤리 강령에 따라 내담자의 정보를 보호합니다.</div>
+        </div>
+      </div>
+      <div class="pv-item">
+        <div class="pv-ico">⚠️</div>
+        <div>
+          <div class="pv-ttl" id="pv2t">비밀보장의 예외 사항</div>
+          <div class="pv-txt" id="pv2d">본인 또는 타인의 생명·안전에 위협이 되는 경우에 한해 관련 기관에 고지할 수 있습니다. 이 경우 내담자에게 사전 고지합니다.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pv-contact fi">
+      <span style="font-size:1.3rem;">📬</span>
+      <div>
+        <div style="font-weight:700;color:var(--t1);margin-bottom:3px;" id="pv-contact-t">기타 문의</div>
+        <span id="pv-contact-d">인재교육원</span>
+        &nbsp;|&nbsp;
+        <a href="tel:052-203-0926" class="pl">052-203-0926</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="sc">
+    <div class="sh fi">
+      <div class="stag" id="fq-tag">자주 묻는 질문</div>
+      <h2 class="stitle" id="fq-title">궁금한 점이 있으신가요?</h2>
+      <div class="div"></div>
+    </div>
+    <div class="faq-list fi">
+      <details class="faq-item">
+        <summary class="faq-q"><div class="qb">Q</div><span id="fq1q">상담 비용이 있나요?</span><span class="qarr">▼</span></summary>
+        <div class="faq-a" id="fq1a">마음정원 상담 서비스는 <strong>임직원 및 가족 모두 완전 무료</strong>로 이용하실 수 있습니다. 1인당 <strong>10회기</strong>가 제공됩니다. 홈페이지에서 '결제하기' 버튼이 있지만, 이는 회사 지원 회기를 차감하는 절차일 뿐 개인 비용 부담은 전혀 없습니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><div class="qb">Q</div><span id="fq2q">회사에서 상담 사실을 알게 되나요?</span><span class="qarr">▼</span></summary>
+        <div class="faq-a" id="fq2a"><strong>상담 내용은 근로복지기본법 제83조에 의거하여 철저히 비밀이 보장됩니다.</strong> 개인의 상담 여부 및 내용은 절대 회사에 공유되지 않습니다. 단, 본인 또는 타인의 생명·안전에 위협이 되는 경우에 한해 관련 기관에 고지할 수 있습니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><div class="qb">Q</div><span id="fq3q">가족은 어떻게 신청해야 하나요?</span><span class="qarr">▼</span></summary>
+        <div class="faq-a" id="fq3a">
+          임직원이 직접 해피민트 앱 또는 홈페이지 신청 화면에서 <strong>이용자를 '가족'으로 설정</strong>하시면 됩니다.<br><br>
+          가족이 직접 신청하시려면 대표번호 <a href="tel:052-202-9001"><strong>052-202-9001</strong></a>로 연락 주시면 안내해 드립니다.<br><br>
+          이용 대상은 임직원의 <strong>배우자, 본인 및 배우자의 부모·자녀</strong>입니다. 부부 동반 상담은 물론 가족 구성원이 개별적으로도 이용하실 수 있습니다.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><div class="qb">Q</div><span id="fq4q">운영 시간 외에도 상담 가능한가요?</span><span class="qarr">▼</span></summary>
+        <div class="faq-a" id="fq4a">정규 운영 시간은 월~금 09:00~18:00이지만, <strong>긴급 심리상담 서비스</strong>를 통해 24시간 지원이 가능합니다. 갑작스러운 위기 상황 발생 시 즉각적인 심리 지원을 받으실 수 있습니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><div class="qb">Q</div><span id="fq5q">상담은 어떤 방식으로 진행되나요?</span><span class="qarr">▼</span></summary>
+        <div class="faq-a" id="fq5a">대면, 전화, 화상, 채팅 상담 모두 가능하며 회당 50분 내외로 진행됩니다. 상담사와 사전 협의를 통해 가장 편안한 방식을 선택하실 수 있습니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><div class="qb">Q</div><span id="fq6q">협력사 직원도 이용 가능한가요?</span><span class="qarr">▼</span></summary>
+        <div class="faq-a" id="fq6a">네, <strong>울산 소재 사내 협력사 임직원</strong>도 이용 가능합니다. 해피민트 앱 또는 홈페이지에서 소속회사 'HD현대중공업' 선택 또는 코드 'hdhhi' 입력 후 이용하시면 됩니다.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD / QR -->
+<section id="download">
+  <div class="sc">
+    <div class="sh fi">
+      <div class="stag">앱 다운로드</div>
+      <h2 class="stitle" id="dl-title">해피민트 앱으로 언제 어디서나</h2>
+      <p class="sdesc" id="dl-desc">스마트폰에서 간편하게 상담 예약, 심리검사, 마음케어 칼럼까지 이용하세요.</p>
+      <div class="div"></div>
+    </div>
+    <div class="qr-wrap fi">
+      <div class="qr-card">
+        <div class="qr-box">
+          <!-- QR Code via Google Charts API -->
+          <img class="qr-code" src="https://chart.googleapis.com/chart?cht=qr&chs=240x240&chl=https%3A%2F%2Fhdhhi.happymint.kr&choe=UTF-8&chld=M|2" alt="해피민트 QR코드" onerror="this.style.display='none';document.getElementById('qr-fallback').style.display='flex'">
+          <div id="qr-fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;width:120px;height:120px;background:var(--bg);border-radius:8px;gap:4px;">
+            <span style="font-size:1.8rem;">📱</span>
+            <span style="font-size:.62rem;color:var(--t3);text-align:center;">QR 코드<br>스캔</span>
+          </div>
+        </div>
+        <div class="qr-info">
+          <div class="qr-title" id="qr-title">해피민트 앱 다운로드</div>
+          <div class="qr-sub" id="qr-sub">
+            QR 코드를 스캔하거나 아래 버튼을 눌러 앱을 다운받으세요.<br>
+            소속회사 <strong style="color:var(--accent)">HD현대중공업</strong> 또는 코드 <strong style="color:var(--accent)">hdhhi</strong> 입력
+          </div>
+          <div class="qr-store-row">
+            <a href="https://apps.apple.com/kr/app/%ED%95%B4%ED%94%BC%EB%AF%BC%ED%8A%B8/id1536523540" target="_blank" class="qr-store-btn">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              App Store
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.telus.happymint" target="_blank" class="qr-store-btn">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L14.6 12 3.18.04A1.35 1.35 0 002.5 1.2v21.6c0 .36.17.7.44.96zM19.38 9.54L16.5 7.9l-3.3 3.3 3.3 3.3 2.92-1.67a1.36 1.36 0 000-2.33l-.04-.06zM4.03.26L15.18 11.4 4.03 22.54 15.18 11.4 4.03.26z"/></svg>
+              Google Play
+            </a>
+            <a href="https://hdhhi.happymint.kr" target="_blank" class="qr-store-btn">
+              🌐 홈페이지
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">🌿 마음정원</div>
+  <p id="ft1">HD현대중공업 임직원 심리상담실</p>
+  <div class="ft-sep"></div>
+  <p id="ft2">위탁운영: 텔러스헬스 주식회사</p>
+  <p id="ft3">문의: 인재교육원 | <a href="tel:052-203-0926">052-203-0926</a></p>
+  <div class="ft-sep"></div>
+  <p><a href="https://hdhhi.happymint.kr" target="_blank">🌐 hdhhi.happymint.kr</a></p>
+  <p style="margin-top:1.4rem;font-size:.67rem;opacity:.28;" id="ft-copy">© HD현대중공업 인재교육원. 본 페이지는 내부 이용 안내 목적으로 제작되었습니다.</p>
+</footer>
+
+<script>
+/* ─── COUNSELOR MODAL ─── */
+const COUNSELORS = {
+  song: {
+    emoji: '🌿', tag: '심리상담실장', name: '송은미', exp: '경력 12년 3개월',
+    careers: [
+      '정부대전청사 공무원마음건강센터 장',
+      '대한산업보건협회 근로자건강센터 전문상담사',
+      '공군교육사령부 보라매리더십센터 상담교수',
+      '지원심리상담연구소 소장',
+      '성모마음정신건강의학과 상담센터 전문상담사',
+      '신한대학교 학생상담센터 전문상담사'
+    ],
+    certs: [
+      ['한국상담학회','전문상담사 1급'],
+      ['성평등가족부(구 여성가족부)','청소년상담사 1급'],
+      ['한국명상학회','명상지도전문가 T급'],
+      ['한국게슈탈트치료연구회','게슈탈트치료지도자'],
+      ['MBTI연구소','MBTI 전문강사']
+    ]
+  },
+  son: {
+    emoji: '🌸', tag: '전문 상담사', name: '손은경', exp: '경력 7년 8개월',
+    careers: [
+      '국방부 병영생활전문상담관',
+      '한국마약퇴치본부 울산함께한걸음센터 상담사'
+    ],
+    certs: [
+      ['한국상담심리학회','상담심리사 2급'],
+      ['산업인력공단','임상심리사 1급'],
+      ['성평등가족부(구 여성가족부)','청소년상담사 1급'],
+      ['고용노동부','직업상담사 2급']
+    ]
+  },
+  seo: {
+    emoji: '🌼', tag: '전문 상담사', name: '서나래', exp: '경력 6년 9개월',
+    careers: [
+      '현대자동차 울산공장 심리상담실 행복쉼터 상담사',
+      '울산금연지원센터 금연상담사',
+      '대구청소년상담복지센터 미디어중독전담상담사'
+    ],
+    certs: [
+      ['한국상담학회','전문상담사 2급'],
+      ['MBTI연구소','MBTI 전문강사'],
+      ['한국애니어그램협회','애니어그램 일반강사'],
+      [null,'TCI 워크숍 수료'],
+      [null,'MMPI-2 워크숍 수료']
+    ]
+  }
+};
+
+function openCounselor(key) {
+  const d = COUNSELORS[key];
+  const careers = d.careers.map(c =>
+    `<li><span class="mo-dot"></span>${c}</li>`
+  ).join('');
+  const certs = d.certs.map(([org, name]) =>
+    `<div class="mo-cert-item">🏅 <span>${org ? `<strong>${org}</strong> ` : ''}${name}</span></div>`
+  ).join('');
+  document.getElementById('co-modal-content').innerHTML = `
+    <div class="mo-head">
+      <div class="mo-av">${d.emoji}</div>
+      <div>
+        <div class="mo-tag">${d.tag}</div>
+        <div class="mo-name">${d.name}</div>
+        <div class="mo-exp">${d.exp}</div>
+      </div>
+    </div>
+    <div class="mo-body">
+      <div class="mo-sec">주요 경력</div>
+      <ul class="mo-cl">${careers}</ul>
+      <div class="mo-sec">자격 사항</div>
+      <div class="mo-cert">${certs}</div>
+    </div>
+  `;
+  document.getElementById('co-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCounselorBtn() {
+  document.getElementById('co-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeCounselor(e) {
+  if (e.target === document.getElementById('co-modal')) closeCounselorBtn();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCounselorBtn();
+});
+
+/* ─── LANGUAGE DATA ─── */
+const LANGS = {
+  ko:{flag:'🇰🇷',label:'한국어'},en:{flag:'🇺🇸',label:'English'},
+  vi:{flag:'🇻🇳',label:'Tiếng Việt'},uz:{flag:'🇺🇿',label:"O'zbek"},
+  id:{flag:'🇮🇩',label:'Indonesia'},si:{flag:'🇱🇰',label:'සිංහල'},
+  th:{flag:'🇹🇭',label:'ภาษาไทย'},ru:{flag:'🇷🇺',label:'Русский'},
+  ky:{flag:'🇰🇬',label:'Кыргызча'},zh:{flag:'🇨🇳',label:'中文'}
+};
+
+// id → [ko text, en text, ...other langs use en fallback]
+const T = {
+  'nav-sub':       ['임직원 심리상담실','Employee Counseling Center','Trung tâm tư vấn tâm lý',"Xodimlar psixologik maslahat markazi",'Pusat Konseling Karyawan','සේවක උපදේශන මධ්‍යස්ථානය','ศูนย์ให้คำปรึกษา','Центр психологической поддержки','Кызматкерлер кеңеш борбору','员工心理咨询中心'],
+  'h-badge':       ['🌿 HD현대중공업 임직원 심리상담실','🌿 HD Hyundai Heavy Industries Employee Counseling','🌿 Nhân viên HD Hyundai','🌿 HD Hyundai xodimlari','🌿 Karyawan HD Hyundai','🌿 HD Hyundai සේවකයෝ','🌿 พนักงาน HD Hyundai','🌿 Сотрудники HD Hyundai','🌿 HD Hyundai кызматкерлери','🌿 HD现代员工心理咨询'],
+  'h-t1':          ['임직원 심리상담실','Employee Counseling Center','Phòng tư vấn tâm lý','Psixologik maslahat xonasi','Ruang Konseling Psikologi','සේවක මනෝ උපදේශන','ห้องให้คำปรึกษาพนักงาน','Центр психологической поддержки','Психологиялык кеңеш борбору','员工心理咨询室'],
+  'h-t2':          ["'마음정원' 이용 안내","'Mind Garden' Guide","Hướng dẫn 'Mind Garden'",'Mind Garden yo\'riqnomasi',"Panduan 'Mind Garden'","'Mind Garden' මාර්ගෝපදේශය","คู่มือ 'Mind Garden'",'Руководство Mind Garden','Mind Garden боюнча нускама',"'Mind Garden'使用指南"],
+  'h-sub':         ['마음이 건강해야 일도, 삶도 풍요로워집니다','A healthy mind leads to a better life and work.','Tâm hồn khỏe mạnh giúp cuộc sống thêm phong phú.',"Sog'lom ruh - yaxshi ish va hayotning asosi.",'Pikiran sehat membawa kehidupan dan pekerjaan lebih baik.','සෞඛ්‍ය සම්පන්න මනසක් ජීවිතය සමෘද්ධ කරයි.','จิตใจที่แข็งแรงนำไปสู่ชีวิตและการทำงานที่ดีขึ้น','Здоровый разум — основа продуктивной работы.','Ден соо акыл жакшы жашоонун негизи.','心理健康是美好生活和高效工作的基础。'],
+  'h-dept':        ['HD현대 계열사 임직원 및 가족을 위한 전문 심리 상담 서비스','Professional psychological counseling for HD Hyundai employees & families','Dịch vụ tư vấn tâm lý cho nhân viên và gia đình HD Hyundai',"HD Hyundai xodimlari va oilalari uchun psixologik maslahat",'Layanan konseling psikologi untuk karyawan dan keluarga HD Hyundai','HD Hyundai සේවකයන් සහ පවුල් සඳහා මනෝ උපදේශනය','บริการให้คำปรึกษาสำหรับพนักงานและครอบครัว HD Hyundai','Профессиональное консультирование для сотрудников HD Hyundai','HD Hyundai кызматкерлери жана үй-бүлөлөрү үчүн кеңеш','HD现代员工及家属专业心理咨询服务'],
+  'h-btn1':        ['🌐 홈페이지 상담 신청','🌐 Apply Online','🌐 Đăng ký trực tuyến','🌐 Onlayn murojaat','🌐 Daftar Online','🌐 සබැඳිව ලියාපදිංචි','🌐 สมัครออนไลน์','🌐 Записаться онлайн','🌐 Онлайн каттоо','🌐 在线申请'],
+  'h-btn2':        ['이용안내 보기 ↓','View Guide ↓','Xem hướng dẫn ↓',"Ko'rsatma ↓",'Lihat Panduan ↓','මාර්ගෝපදේශය ↓','ดูคู่มือ ↓','Руководство ↓','Нускама ↓','查看指南 ↓'],
+  'hs1':           ['전문 상담사','Counselors','Tư vấn viên','Maslahatchilar','Konselor','උපදේශකයෝ','ผู้ให้คำปรึกษา','Консультантов','Кеңешчилер','咨询师'],
+  'hs2':           ['상담 센터','Centers','Trung tâm','Markazlar','Pusat','මධ්‍යස්ථාන','ศูนย์','Центров','Борборлор','中心'],
+  'hs3':           ['제공 서비스','Services','Dịch vụ','Xizmatlar','Layanan','සේවාවන්','บริการ','Услуг','Кызматтар','服务项目'],
+  'hs4':           ['긴급 상담','Emergency','Khẩn cấp','Favqulodda','Darurat','හදිසි','ฉุกเฉิน','Экстренно','Шашылыш','紧急咨询'],
+  'hs5':           ['1인 10회기','10 Sessions','10 buổi','10 sessiya','10 Sesi','සැසි 10','10 ครั้ง','10 сессий','10 сессия','10次会谈'],
+  'ov-tag':        ['운영 개요','Overview','Tổng quan',"Umumiy ma'lumot",'Ikhtisar','දළ විශ්ලේෂණය','ภาพรวม','Обзор','Жалпы маалымат','运营概要'],
+  'ov-title':      ['마음정원은 어떤 곳인가요?','What is Mind Garden?','Mind Garden là gì?','Mind Garden nima?','Apa itu Mind Garden?','Mind Garden යනු කුමක්ද?','Mind Garden คืออะไร?','Что такое Mind Garden?','Mind Garden деген эмне?','Mind Garden是什么？'],
+  'ap-tag':        ['상담 신청','Apply','Đăng ký','Murojaat','Pendaftaran','ලියාපදිංචිය','สมัคร','Запись','Каттоо','申请'],
+  'ap-title':      ['상담 신청 방법','How to Apply','Cách đăng ký',"Qanday murojaat qilish",'Cara Mendaftar','ලියාපදිංචි වන ආකාරය','วิธีสมัคร','Как записаться','Кантип катталуу','如何申请'],
+  'pv-tag':        ['비밀보장 원칙','Confidentiality','Bảo mật','Maxfiylik','Kerahasiaan','රහස්‍යතාවය','การรักษาความลับ','Конфиденциальность','Купуялык','保密原则'],
+  'pv-title':      ['당신의 이야기는 안전합니다','Your Story Is Safe With Us','Câu chuyện của bạn được bảo vệ',"Hikoyangiz xavfsiz",'Cerita Anda Aman','ඔබේ කතාව ආරක්ෂිතව','เรื่องราวของคุณปลอดภัย','Ваши истории в безопасности','Сиздин аңгемеңиз коопсуз','您的故事受到安全保护'],
+  'pv-quote':      ['마음정원을 찾아주시는 모든 분의 이야기는<br>안전하게 보호됩니다','Every story shared at Mind Garden<br>is safely and fully protected.','Mọi câu chuyện chia sẻ tại Mind Garden đều được bảo vệ an toàn.','Mind Garden ga murojaat qilganlarning barcha gaplari xavfsiz.','Setiap cerita yang dibagikan di Mind Garden dilindungi sepenuhnya.','Mind Garden හිදී බෙදාගන්නා සෑම කතාවක්ම සුරක්ෂිතව ආරක්ෂා කෙරේ.','ทุกเรื่องราวที่แบ่งปันใน Mind Garden ได้รับการปกป้องอย่างปลอดภัย','Каждая история в Mind Garden надёжно защищена.','Mind Garden да бөлүшүлгөн ар бир аңгеме коопсуз сакталат.','在Mind Garden分享的每一个故事都受到安全保护。'],
+  'fq-tag':        ['자주 묻는 질문','FAQ','Câu hỏi thường gặp',"Ko'p beriladigan savollar",'FAQ','නිතර අසන ප්‍රශ්න','คำถามที่พบบ่อย','FAQ','Суроолор','常见问题'],
+  'fq-title':      ['궁금한 점이 있으신가요?','Have a Question?','Có câu hỏi không?','Savollaringiz bormi?','Ada pertanyaan?','ප්‍රශ්නයක් තිබේද?','มีคำถามไหม?','Есть вопросы?','Суроолоруңуз барбы?','有什么问题吗？'],
+  'dl-title':      ['해피민트 앱으로 언제 어디서나','HappyMint App — Always Available','Ứng dụng HappyMint mọi lúc mọi nơi','HappyMint ilovasi — istalgan joyda','Aplikasi HappyMint Kapan Saja','HappyMint App — සෑම විටම','แอป HappyMint พร้อมใช้งานเสมอ','Приложение HappyMint всегда рядом','HappyMint колдонмосу ар дайым','随时随地 HappyMint 应用'],
+  'co-tag':        ['전문 상담사','Our Counselors','Tư vấn viên','Maslahatchilar','Konselor Kami','අපගේ උපදේශකයෝ','ผู้ให้คำปรึกษา','Наши консультанты','Кеңешчилерибиз','我们的咨询师'],
+  'co-title':      ['마음정원 전문 상담사를 소개합니다','Meet Our Mind Garden Counselors','Gặp gỡ các tư vấn viên Mind Garden',"Mind Garden mutaxassis maslahatchilar",'Konselor Mind Garden','Mind Garden උපදේශකයන් හඳුන්වා දෙමු','พบกับผู้ให้คำปรึกษา Mind Garden','Познакомьтесь с консультантами Mind Garden','Mind Garden кеңешчилери менен таанышыңыз','认识Mind Garden的专业咨询师'],
+  'nl-overview':   ['운영 개요','Overview','Tổng quan','Umumiy',"Ikhtisar",'දළ විශ්ලේෂණය','ภาพรวม','Обзор','Жалпы','概要'],
+  'nl-system':     ['운영 체계','System','Hệ thống','Tizim','Sistem','පද්ධතිය','ระบบ','Система','Тутум','体系'],
+  'nl-services':   ['제공 서비스','Services','Dịch vụ','Xizmatlar','Layanan','සේවාවන්','บริการ','Услуги','Кызматтар','服务'],
+  'nl-counselors': ['상담사 소개','Counselors','Tư vấn viên','Maslahatchilar','Konselor','උපදේශකයෝ','ผู้ให้คำปรึกษา','Консультанты','Кеңешчилер','咨询师'],
+  'nl-apply':      ['상담 신청','Apply','Đăng ký','Murojaat','Daftar','ලියාපදිංචිය','สมัคร','Запись','Каттоо','申请'],
+  'nl-privacy':    ['비밀보장','Privacy','Bảo mật','Maxfiylik','Privasi','රහස්‍යතාවය','ความลับ','Конф.','Купуялык','保密'],
+  'nl-faq':        ['FAQ','FAQ','FAQ','FAQ','FAQ','FAQ','FAQ','FAQ','FAQ','FAQ'],
+  'nl-cta':        ['상담 신청하기 →','Apply Now →','Đăng ký →','Murojaat →','Daftar →','ලියාපදිංචි →','สมัคร →','Записаться →','Катталуу →','申请 →'],
+};
+
+const LANG_ORDER = ['ko','en','vi','uz','id','si','th','ru','ky','zh'];
+let curLang = 'ko';
+
+function getT(key) {
+  const arr = T[key];
+  if (!arr) return null;
+  const idx = LANG_ORDER.indexOf(curLang);
+  return arr[idx] !== undefined ? arr[idx] : arr[1]; // fallback to en
+}
+
+function applyTranslations() {
+  Object.keys(T).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = getT(id);
+  });
+}
+
+function openSplash() {
+  document.getElementById('splash').classList.remove('gone');
+}
+
+function setLang(lang) {
+  curLang = lang;
+  document.getElementById('splash').classList.add('gone');
+  const m = LANGS[lang];
+  document.getElementById('lang-toggle-btn').textContent = m.flag + ' ' + m.label + ' ▾';
+  document.documentElement.lang = lang;
+  applyTranslations();
+}
+
+// Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('v'), (e.target.dataset.d||0)*80);
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.fi').forEach((el,i) => { el.dataset.d = i%5; obs.observe(el); });
+
+// Nav active
+const secs = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur='';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop-80) cur=s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--accent)' : '';
+  });
+});
+</script>
+</body>
+</html>
